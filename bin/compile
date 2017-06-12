@@ -109,6 +109,7 @@ if [[ ! -f ${BUILDDIR}/bin/ofelia ]]; then
   step "Downloaded ${OFELIA_URL}"
 fi
 
+if [[ ${CURATOR_ENABLED} -eq 1 ]]; then
 # Install curator
 if [[ ! -d ${BUILDDIR}/python3 ]]; then
   if [[ ${CURATOR_COMPILE} -eq 0 ]]; then
@@ -220,7 +221,7 @@ else # else install curator
   # Create empty schedule.ini for ofelia
   touch ${BUILDDIR}/ofelia/schedule.ini
 fi # end install curator
-
+fi
 # Install OpenJDK
 if [[ ! -d ${BUILDDIR}/openjdk ]]; then
   start "Installing openjdk"
