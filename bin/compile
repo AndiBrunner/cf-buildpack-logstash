@@ -307,6 +307,7 @@ export LS_HEAP_SIZE=${LS_HEAP_SIZE}
 \${HOME}/logstash-${LOGSTASH_VERSION}/bin/logstash -f logstash.conf.d ${LOGSTASH_CMD_ARGS}
 EOF
 else
+cat << EOF >> ${BUILDDIR}/bin/run.sh
 #!/bin/bash
 # Start Logstash
 export JAVA_HOME=\${HOME}/openjdk
