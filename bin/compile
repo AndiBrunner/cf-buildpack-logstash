@@ -285,6 +285,8 @@ EOF
 step "Create bin/run.sh"
 mkdir -p ${BUILDDIR}/.profile.d
 echo 'PATH=${PATH}:${HOME}/bin:${HOME}/openjdk/bin' > ${BUILDDIR}/.profile.d/run.sh
+
+if [[ ${CURATOR_ENABLED} -eq 1 ]]; then
 cat << EOF >> ${BUILDDIR}/bin/run.sh
 #!/bin/bash
 # Prepare curator configuration
@@ -304,6 +306,14 @@ export JAVA_HOME=\${HOME}/openjdk
 export LS_HEAP_SIZE=${LS_HEAP_SIZE}
 \${HOME}/logstash-${LOGSTASH_VERSION}/bin/logstash -f logstash.conf.d ${LOGSTASH_CMD_ARGS}
 EOF
+else
+#!/bin/bash
+# Start Logstash
+export JAVA_HOME=\${HOME}/openjdk
+export LS_HEAP_SIZE=${LS_HEAP_SIZE}
+\${HOME}/logstash-${LOGSTASH_VERSION}/bin/logstash -f logstash.conf.d ${LOGSTASH_CMD_ARGS}
+EOF
+fi
 
 chmod +x ${BUILDDIR}/bin/*.sh
 
