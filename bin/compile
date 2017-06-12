@@ -286,7 +286,7 @@ step "Create bin/run.sh"
 mkdir -p ${BUILDDIR}/.profile.d
 echo 'PATH=${PATH}:${HOME}/bin:${HOME}/openjdk/bin' > ${BUILDDIR}/.profile.d/run.sh
 
-if [[ ${CURATOR_ENABLED} -ne 1 ]]; then
+if [[ ${CURATOR_ENABLED} -eq 1 ]]; then
 cat << EOF >> ${BUILDDIR}/bin/run.sh
 #!/bin/bash
 # Prepare curator configuration
